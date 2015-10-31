@@ -2,4 +2,4 @@
 .*
 !.gitignore
 venv/*
-copper.egg-info/*
+*.egg-info/*
