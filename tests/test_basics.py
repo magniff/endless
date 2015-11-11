@@ -22,3 +22,16 @@ def test_palindrome():
 
     assert not is_palindrome(word='some arbitary text')
     assert is_palindrome(word='abcddcba')
+
+
+def test_maccarthy():
+    @restack.decorate
+    def maccarty(value):
+        if value > 100:
+            return value - 10
+        else:
+            return (yield {'value': maccarty(value=value+11)})
+    
+    for value in range(-100,100):
+        assert maccarty(value=value) == 91
+
