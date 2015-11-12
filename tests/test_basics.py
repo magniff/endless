@@ -39,3 +39,20 @@ def test_maccarthy():
         assert maccarthy(value=value) == 91
 
     assert maccarthy(value=-1000000) == 91
+
+
+# https://en.wikipedia.org/wiki/Ackermann_function
+def test_ackermann():
+
+    @restack.decorate
+    def ackermann(m, n):
+        if m == 0:
+            return n + 1
+        elif m > 0 and n == 0:
+            return (yield {'m': m - 1, 'n': 1})
+        elif m > 0 and n > 0:
+            return (yield {'m': m - 1, 'n': (yield {'m': m, 'n': n-1})})
+
+    assert ackermann(n=1, m=1) == 3
+    assert ackermann(n=2, m=2) == 7
+    assert ackermann(n=3, m=3) == 61
