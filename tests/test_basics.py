@@ -13,6 +13,7 @@ def test_factorial():
 
 def test_palindrome():
 
+    # very unefficient recursive algorithm
     @restack.decorate
     def is_palindrome(word):
         return (
@@ -24,14 +25,17 @@ def test_palindrome():
     assert is_palindrome(word='abcddcba')
 
 
+# https://en.wikipedia.org/wiki/McCarthy_91_function
 def test_maccarthy():
+
     @restack.decorate
-    def maccarty(value):
+    def maccarthy(value):
         if value > 100:
             return value - 10
         else:
-            return (yield {'value': maccarty(value=value+11)})
-    
-    for value in range(-100,100):
-        assert maccarty(value=value) == 91
+            return (yield {'value': (yield {'value': value+11})})
 
+    for value in range(-100, 100):
+        assert maccarthy(value=value) == 91
+
+    assert maccarthy(value=-1000000) == 91
