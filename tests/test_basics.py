@@ -13,7 +13,7 @@ def test_factorial():
 
 def test_palindrome():
 
-    # very unefficient recursive algorithm
+    # very inefficient recursive algorithm
     @restack.decorate
     def is_palindrome(word):
         return (
