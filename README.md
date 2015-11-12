@@ -1,13 +1,13 @@
 # RESTACK
 
-This tiny library helps you to write recoursive functions without any ''stack overflow'' related pain.
+This tiny library helps you to write recursive functions without any ''stack overflow'' related pain.
 
 Say you have a function like this:
 ```python
 def factorial(value):
 	return 1 if value == 1 else value * factorial(value-1)
 ```
-It works fine untill the ```value``` thing is less then a ```sys.getrecursionlimit()```.
+It works fine until the ```value``` thing is less then a ```sys.getrecursionlimit()```.
 
 RESTACK provides a solution (stolen from Dave Beazley, really)
 ```python
