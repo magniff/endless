@@ -15,7 +15,13 @@ RESTACK provides a solution (stolen from Dave Beazley, really)
 def factorial(value):
 	return 1 if value == 1 else value * (yield {'value': value-1})
 ```
-the last one is completely stack overflow free, see tests for more insight.
+
+and then you can use it as a normal function:
+``` python
+>>> result = factorial(value=10000)  # note that keyword - like style is a mandatory
+```
+
+This decorated function is completely stack overflow free, because it doesn't use process's stack section at all.
 
 Also stuff like this one is also possible (called maccarthy91 function):
 ```python
@@ -26,3 +32,4 @@ def maccarthy(value):
     else:
         return (yield {'value': (yield {'value': value+11})})
 ```
+##### So the rule is that: whenever you want to use a recursive call, just yield the dictionary, representing the function kwargs, that is it.
