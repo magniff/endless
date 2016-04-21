@@ -2,6 +2,9 @@ from inspect import signature
 from functools import wraps
 
 
+MAX_DEPTH = 1000
+
+
 def make(function):
 
     @wraps(function)
@@ -15,6 +18,11 @@ def make(function):
                 try:
                     value = stack[-1].send(value)
                     stack.append(function(**value))
+                    if len(stack) > MAX_DEPTH:
+                        raise RuntimeError(
+                            "Stack depleted. To make it even larger, set the "
+                            "MAX_DEPTH to something appropriate."
+                        )
                     value = None
                 except StopIteration as e:
                     stack.pop()

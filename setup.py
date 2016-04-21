@@ -1,10 +1,10 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 setup(
     name='endless',
     author='magniff',
     version='0.0.2',
-    packages=find_packages(),
+    py_modules=['endless'],
     zip_safe=False,
 )

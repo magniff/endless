@@ -1,6 +1,9 @@
 import endless
 
 
+endless.MAX_DEPTH = 100000
+
+
 def test_factorial():
 
     @endless.make
