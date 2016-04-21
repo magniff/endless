@@ -1,4 +1,4 @@
-# RESTACK
+# ENDLESS
 
 ## WTF
 This tiny library helps you to write recursive functions without any ''stack overflow'' related pain.
@@ -10,9 +10,9 @@ def factorial(value):
 ```
 It works fine until the ```value``` thing is less then a ```sys.getrecursionlimit()```.
 
-RESTACK provides a solution
+ENDLESS provides a solution
 ```python
-@restack.endless
+@endless.make
 def factorial(value):
     return 1 if value == 1 else value * (yield {'value': value-1})
 ```
@@ -26,7 +26,7 @@ This decorated function is completely stack overflow free, because it doesn't us
 
 Also stuff like this one is also possible (called maccarthy91 function):
 ```python
-@restack.endless
+@endless.make
 def maccarthy(value):
     if value > 100:
         return value - 10
@@ -37,5 +37,5 @@ def maccarthy(value):
 
 ## INSTALLATION
 ```python
-pip install restack
+pip install endless
 ```

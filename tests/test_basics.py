@@ -1,9 +1,9 @@
-import restack
+import endless
 
 
 def test_factorial():
 
-    @restack.endless
+    @endless.make
     def fac(n):
         return 1 if n == 1 else n * (yield {'n': n-1})
 
@@ -14,7 +14,7 @@ def test_factorial():
 def test_palindrome():
 
     # very inefficient recursive algorithm
-    @restack.endless
+    @endless.make
     def is_palindrome(word):
         return (
             len(word) in [0, 1] or word[0] == word[-1] and
@@ -28,7 +28,7 @@ def test_palindrome():
 # https://en.wikipedia.org/wiki/McCarthy_91_function
 def test_maccarthy():
 
-    @restack.endless
+    @endless.make
     def maccarthy(value):
         if value > 100:
             return value - 10
@@ -44,7 +44,7 @@ def test_maccarthy():
 # https://en.wikipedia.org/wiki/Ackermann_function
 def test_ackermann():
 
-    @restack.endless
+    @endless.make
     def ackermann(m, n):
         if m == 0:
             return n + 1

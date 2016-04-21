@@ -2,7 +2,7 @@ from inspect import signature
 from functools import wraps
 
 
-def endless(function):
+def make(function):
 
     @wraps(function)
     def stackless_function_wrapper(*args, **kwargs):
