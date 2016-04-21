@@ -3,18 +3,18 @@ import restack
 
 def test_factorial():
 
-    @restack.decorate
+    @restack.endless
     def fac(n):
         return 1 if n == 1 else n * (yield {'n': n-1})
 
     assert fac(n=10) == 3628800
-    assert fac(n=10000) == fac(n=9999) * 10000
+    assert fac(10000) == fac(n=9999) * 10000
 
 
 def test_palindrome():
 
     # very inefficient recursive algorithm
-    @restack.decorate
+    @restack.endless
     def is_palindrome(word):
         return (
             len(word) in [0, 1] or word[0] == word[-1] and
@@ -22,13 +22,13 @@ def test_palindrome():
         )
 
     assert not is_palindrome(word='some arbitary text')
-    assert is_palindrome(word='abcddcba')
+    assert is_palindrome('abcddcba')
 
 
 # https://en.wikipedia.org/wiki/McCarthy_91_function
 def test_maccarthy():
 
-    @restack.decorate
+    @restack.endless
     def maccarthy(value):
         if value > 100:
             return value - 10
@@ -38,13 +38,13 @@ def test_maccarthy():
     for value in range(-100, 100):
         assert maccarthy(value=value) == 91
 
-    assert maccarthy(value=-1000000) == 91
+    assert maccarthy(-1000000) == 91
 
 
 # https://en.wikipedia.org/wiki/Ackermann_function
 def test_ackermann():
 
-    @restack.decorate
+    @restack.endless
     def ackermann(m, n):
         if m == 0:
             return n + 1
@@ -54,5 +54,5 @@ def test_ackermann():
             return (yield {'m': m - 1, 'n': (yield {'m': m, 'n': n-1})})
 
     assert ackermann(n=1, m=1) == 3
-    assert ackermann(n=2, m=2) == 7
-    assert ackermann(n=3, m=3) == 61
+    assert ackermann(2, 2) == 7
+    assert ackermann(3, n=3) == 61
