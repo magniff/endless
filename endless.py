@@ -2,7 +2,12 @@ from inspect import signature
 from functools import wraps
 
 
-MAX_DEPTH = 1000
+# 10000 should be enough for everyone, you know
+MAX_DEPTH = 10000
+ERROR_TEMPLATE = (
+    "Function {fname} exhausted virtual call stack. Tip: Examine this function"
+    " and enlarge MAX_DEPTH (current {depth}) variable if needed."
+)
 
 
 def make(function):
@@ -20,13 +25,14 @@ def make(function):
                     stack.append(function(**value))
                     if len(stack) > MAX_DEPTH:
                         raise RuntimeError(
-                            "Stack depleted. To make it even larger, set the "
-                            "MAX_DEPTH to something appropriate."
+                            ERROR_TEMPLATE.format(
+                                fname=function.__name__, depth=MAX_DEPTH
+                            )
                         )
                     value = None
-                except StopIteration as e:
+                except StopIteration as result_handler:
                     stack.pop()
-                    value = e.value
+                    value = result_handler.value
             return value
 
         kwargs.update(signature_instance.bind_partial(*args).arguments)
