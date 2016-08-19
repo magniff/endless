@@ -1,4 +1,5 @@
 # ENDLESS
+[![Build Status](https://api.travis-ci.org/magniff/endless.svg?branch=master)](https://travis-ci.org/magniff/endless)
 
 ## WTF
 This tiny library helps you to write recursive functions without any ''stack overflow'' related pain.

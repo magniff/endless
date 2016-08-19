@@ -5,8 +5,8 @@ from functools import wraps
 # 10000 should be enough for everyone, you know
 MAX_DEPTH = 10000
 ERROR_TEMPLATE = (
-  "Function {fname} exhausted virtual call stack. Tip: Examine this function"
-  " and enlarge MAX_DEPTH (current {depth}) variable if needed."
+    "Function {fname} exhausted virtual call stack. Tip: Examine this function"
+    " and enlarge MAX_DEPTH (current {depth}) variable if needed."
 )
 
 
